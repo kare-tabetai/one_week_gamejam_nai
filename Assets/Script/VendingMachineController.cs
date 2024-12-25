@@ -11,7 +11,7 @@ public class VendingMachineController : MonoBehaviour
     [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
     public float GroundedRadius = 0.28f;
     [Tooltip("Useful for rough ground")]
-    public float GroundedOffset = -0.14f;
+    public float GroundedOffset = -0.0f;
     [Tooltip("How far in degrees can you move the camera up")]
     public float TopClamp = 70.0f;
     [Tooltip("How far in degrees can you move the camera down")]
@@ -20,14 +20,21 @@ public class VendingMachineController : MonoBehaviour
     public float CameraAngleOverride = 0.0f;
     [Tooltip("What layers the character uses as ground")]
     public LayerMask GroundLayers;
+    public LayerMask shot_target_layer;
     [Tooltip("For locking the camera position on all axis")]
     public bool LockCameraPosition = false;
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
+    public Transform can_fire_point;
+    public GameObject can_bullet;
+    public float shot_target_ray_cast_length = 20.0f;
+    public float throw_up_y_max = 5.0f;
+
 #if ENABLE_INPUT_SYSTEM
     public PlayerInput _playerInput;
 #endif
     const float _threshold = 0.01f;
+    const float kShotUnHitRayTargetPointLength = 5.0f;
 
     private bool IsCurrentDeviceMouse
     {
@@ -44,8 +51,9 @@ public class VendingMachineController : MonoBehaviour
     float _cinemachineTargetYaw;
     float _cinemachineTargetPitch;
 
-    bool Grounded;
+    bool grounded;
     Vector2 input_vec;
+    Vector3 shot_target_point;
     void Start()
     {
 
@@ -53,52 +61,109 @@ public class VendingMachineController : MonoBehaviour
 
     void Update()
     {
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
+        rb.WakeUp();
+
+        if (grounded && UnityEngine.Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jump_impulse, ForceMode.Impulse);
+        }
+        if (UnityEngine.Input.GetKeyDown(KeyCode.E) || UnityEngine.Input.GetMouseButtonDown(0))
+        {
+            shot();
         }
 
         input_vec = new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal"), UnityEngine.Input.GetAxisRaw("Vertical"));
 
-        GroundedCheck();
+        calculateShotTargetPoint();
+        groundedCheck();
+        clampSpeed();
+    }
+
+    void shot()
+    {
+        var can = Instantiate(can_bullet, can_fire_point.position, Random.rotation);
+        //var dir = shot_target_point - can.transform.position;
+        //dir.Normalize();
+
+        var dir = ThrowUpCalculation.OrbitCalculations(
+            can.transform.position,
+            shot_target_point,
+            shot_target_point.y + throw_up_y_max);
+        can.GetComponent<CanBullet>().initialize(dir);
     }
 
     void LateUpdate()
     {
         CameraRotation();
+        correctVendingFornt();
     }
 
     private void FixedUpdate()
     {
-        rb.WakeUp();
-        if (input_vec == Vector2.zero)
-        {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            return;
-        }
+        if (input_vec == Vector2.zero) { return; }
 
         var force = move_force * Time.deltaTime * new Vector3(input_vec.x, 0, input_vec.y);
-
         rb.AddForce(force);
+    }
+
+    void calculateShotTargetPoint()
+    {
+        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, shot_target_ray_cast_length, shot_target_layer))
+        {
+            shot_target_point = hit.point;
+        }
+        else
+        {
+            shot_target_point = Camera.main.transform.forward * kShotUnHitRayTargetPointLength;
+        }
+    }
+
+    void correctVendingFornt()
+    {
+        var camera_forward = CinemachineCameraTarget.transform.forward;
+        camera_forward.y = 0.0f;
+        if (camera_forward == Vector3.zero) { return; }
+        camera_forward.Normalize();
+        rb.transform.forward = camera_forward;
+    }
+
+    void clampSpeed()
+    {
+        if (input_vec == Vector2.zero)
+        {
+            rb.velocity = new Vector3(0.0f, rb.velocity.y, 0.0f);
+        }
+        rb.angularVelocity = Vector3.zero;
 
         var vel = rb.velocity;
+        var vel_y = vel.y;
+        vel.y = 0.0f;
         if (max_speed * max_speed < vel.sqrMagnitude)
         {
             vel = vel.normalized * max_speed;
         }
-        rb.velocity = vel;
+        rb.velocity = new Vector3(vel.x, vel_y, vel.z);
     }
 
-    private void GroundedCheck()
+    private void groundedCheck()
     {
-        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
-            transform.position.z);
-        Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
+        Debug.DrawLine(transform.position, transform.position - Vector3.down * GroundedOffset);
+        grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
             QueryTriggerInteraction.Ignore);
-
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
+        Gizmos.DrawSphere(spherePosition, GroundedRadius);
+
+        Gizmos.DrawSphere(shot_target_point, 0.5f);
+    }
     private void CameraRotation()
     {
         // if there is an input and camera position is not fixed
