@@ -251,7 +251,7 @@ MonoBehaviour:
   can_bullet: {fileID: 2498523246416398285, guid: 04aa9d445965f2b409e0bdcb282c1bb5,
     type: 3}
   shot_target_ray_cast_length: 20
-  throw_up_y_max: 1
+  throw_up_y_max: 0.5
   _playerInput: {fileID: 4909609846967251418}
 --- !u!114 &5768567059106912520
 MonoBehaviour:

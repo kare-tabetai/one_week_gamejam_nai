@@ -29,12 +29,12 @@ public class VendingMachineController : MonoBehaviour
     public GameObject can_bullet;
     public float shot_target_ray_cast_length = 20.0f;
     public float throw_up_y_max = 5.0f;
+    public float shot_un_hit_ray_target_length = 5.0f;
 
 #if ENABLE_INPUT_SYSTEM
     public PlayerInput _playerInput;
 #endif
     const float _threshold = 0.01f;
-    const float kShotUnHitRayTargetPointLength = 5.0f;
 
     private bool IsCurrentDeviceMouse
     {
@@ -102,8 +102,24 @@ public class VendingMachineController : MonoBehaviour
     {
         if (input_vec == Vector2.zero) { return; }
 
-        var force = move_force * Time.deltaTime * new Vector3(input_vec.x, 0, input_vec.y);
+        Vector3 x_dir = CinemachineCameraTarget.transform.right;
+        Vector3 y_dir = Vector3.zero;
+        var camera_foward = GetMainCameraXZPlaneForward();
+        if (camera_foward != null) { y_dir = camera_foward.Value; }
+
+        Vector3 move_dir = x_dir * input_vec.x + y_dir * input_vec.y;
+        move_dir.Normalize();
+        var force = move_force * Time.deltaTime * move_dir;
         rb.AddForce(force);
+    }
+
+    Vector3? GetMainCameraXZPlaneForward()
+    {
+        var camera_forward = CinemachineCameraTarget.transform.forward;
+        camera_forward.y = 0.0f;
+        if (camera_forward == Vector3.zero) { return null; }
+        camera_forward.Normalize();
+        return camera_forward;
     }
 
     void calculateShotTargetPoint()
@@ -118,17 +134,17 @@ public class VendingMachineController : MonoBehaviour
         }
         else
         {
-            shot_target_point = Camera.main.transform.forward * kShotUnHitRayTargetPointLength;
+            shot_target_point = Camera.main.transform.position + Camera.main.transform.forward * shot_un_hit_ray_target_length;
         }
     }
 
     void correctVendingFornt()
     {
-        var camera_forward = CinemachineCameraTarget.transform.forward;
-        camera_forward.y = 0.0f;
-        if (camera_forward == Vector3.zero) { return; }
-        camera_forward.Normalize();
-        rb.transform.forward = camera_forward;
+        var foward = GetMainCameraXZPlaneForward();
+        if (foward != null)
+        {
+            rb.transform.forward = foward.Value;
+        }
     }
 
     void clampSpeed()
