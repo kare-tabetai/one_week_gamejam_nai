@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1687793683691680020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: VendingMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1687793683691680020
 Transform:
@@ -196,6 +196,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: vending_machine_huta
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483992344296695571, guid: 13f639f14db820d4dbb3c9620ff1fcc9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483992344296695571, guid: 13f639f14db820d4dbb3c9620ff1fcc9,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8907089161364216794, guid: 13f639f14db820d4dbb3c9620ff1fcc9,
         type: 3}
