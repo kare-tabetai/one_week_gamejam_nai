@@ -89,7 +89,7 @@ public class VendingMachineController : MonoBehaviour
             can.transform.position,
             shot_target_point,
             shot_target_point.y + throw_up_y_max);
-        can.GetComponent<CanBullet>().initialize(dir);
+        can.GetComponent<Bullet>().Initialize(dir);
     }
 
     void LateUpdate()
@@ -176,9 +176,9 @@ public class VendingMachineController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
-        Gizmos.DrawSphere(spherePosition, GroundedRadius);
+        Gizmos.DrawWireSphere(spherePosition, GroundedRadius);
 
-        Gizmos.DrawSphere(shot_target_point, 0.5f);
+        Gizmos.DrawWireSphere(shot_target_point, 0.1f);
     }
     private void CameraRotation()
     {

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CinemachineTarget
   - SkyboxCamera
+  - Stage
+  - Enemy
   layers:
   - Default
   - TransparentFX
