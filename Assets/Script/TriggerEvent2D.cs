@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
-public class TriggerEvent : MonoBehaviour
-{
+public class TriggerEvent2D : MonoBehaviour {
 
     [System.Serializable]
-    private class TriggerUnityEvent : UnityEvent<Collider> { }
+    private class TriggerUnityEvent : UnityEvent<Collider2D> { }
 
     [SerializeField]
     TriggerUnityEvent m_enter_events;
@@ -17,7 +18,7 @@ public class TriggerEvent : MonoBehaviour
     [SerializeField]
     string[] m_trigger_tag;
 
-    public void DestroyGameObject(Collider collision)
+    public void DestroyGameObject(Collider2D collision)
     {
         if (collision.gameObject)
         {
@@ -25,7 +26,7 @@ public class TriggerEvent : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (m_enter_events == null)
         {
@@ -49,7 +50,7 @@ public class TriggerEvent : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (m_exit_events == null)
         {
@@ -72,7 +73,7 @@ public class TriggerEvent : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (m_stay_events == null)
         {

@@ -41446,6 +41446,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 919057810}
     m_Modifications:
+    - target: {fileID: 4615261096636356444, guid: d11bbf7a0411b5f4d92dcf9a08b7fd1d,
+        type: 3}
+      propertyPath: brick_shoot_range
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5847049938049155406, guid: d11bbf7a0411b5f4d92dcf9a08b7fd1d,
         type: 3}
       propertyPath: m_Name

@@ -6,11 +6,8 @@ public class NormalEnemy : MonoBehaviour
     {
         Idle,
         TrackingToShootPoint,
-        TrackingToAttackPoint,
         Shooting,
         ShootingInterval,
-        Attacking,
-        AttackingInterval,
     }
 
     public Animator animator;
@@ -19,10 +16,10 @@ public class NormalEnemy : MonoBehaviour
     public GameObject brick;
     public GameObject brick_prefab;
     public float brick_shoot_range;
-    public float attack_range;
     public Transform target;
     public float tracking_speed;
     public float throw_up_y_max = 1.0f;
+    public float shot_interval;
 
     State state;
     float timer;
@@ -39,14 +36,11 @@ public class NormalEnemy : MonoBehaviour
             case State.TrackingToShootPoint:
                 UpdateShootPointTracking();
                 break;
-            case State.TrackingToAttackPoint:
-                UpdateAttackPointTracking();
-                break;
             case State.Shooting:
-                UpdateShooting();
+                FaceToTarget();
                 break;
-            case State.Attacking:
-                UpdateAttacking();
+            case State.ShootingInterval:
+                UpdateShootingInterval();
                 break;
         }
 
@@ -56,8 +50,7 @@ public class NormalEnemy : MonoBehaviour
     {
         if (target)
         {
-            state = Random.Range(0, 2) == 0 ? State.TrackingToShootPoint : State.TrackingToAttackPoint;
-            animator.SetBool("Walking", true);
+            ChangeTracking();
         }
         else
         {
@@ -65,8 +58,20 @@ public class NormalEnemy : MonoBehaviour
         }
     }
 
+    void ChangeTracking()
+    {
+        state = State.TrackingToShootPoint;
+        animator.SetBool("Walking", true);
+    }
+
     void UpdateShootPointTracking()
     {
+        if (!target)
+        {
+            state = State.Idle;
+            return;
+        }
+
         var to_target = target.position - transform.position;
         if (to_target.sqrMagnitude <= brick_shoot_range * brick_shoot_range)
         {
@@ -74,45 +79,46 @@ public class NormalEnemy : MonoBehaviour
             return;
         }
 
+        to_target.y = 0; ;
+        if (to_target == Vector3.zero) { return; }
+
         to_target.Normalize();
-        rb.velocity = Vector3.zero;
+        transform.forward = to_target;
+        transform.Translate(Time.deltaTime * tracking_speed * to_target);
     }
 
     void ChangeStateShoot()
     {
         state = State.Shooting;
         animator.SetTrigger("Shoot");
-        rb.velocity = Vector3.zero;
+        animator.SetBool("Walking", false);
+        FaceToTarget();
+
     }
 
-    void UpdateAttackPointTracking()
+    void FaceToTarget()
     {
+        if (!target) { return; }
         var to_target = target.position - transform.position;
-        if (to_target.sqrMagnitude <= attack_range * attack_range)
-        {
-            ChangeStateAttack();
-            return;
-        }
-
+        to_target.y = 0; ;
+        if (to_target == Vector3.zero) { return; }
         to_target.Normalize();
-        rb.velocity = Vector3.zero;
+        transform.forward = to_target;
     }
 
-    void ChangeStateAttack()
+    void UpdateShootingInterval()
     {
-        state = State.Attacking;
-        animator.SetTrigger("Attack");
-        rb.velocity = Vector3.zero;
+        timer += Time.deltaTime;
+        if (shot_interval <= timer)
+        {
+            timer = 0;
+            ChangeTracking();
+        }
     }
 
-    void UpdateShooting()
+    public void EndShoot()
     {
-
-    }
-
-    void UpdateAttacking()
-    {
-
+        state = State.ShootingInterval;
     }
 
     public void Damaged(int damage)
@@ -147,13 +153,22 @@ public class NormalEnemy : MonoBehaviour
         brick_shot.GetComponent<Bullet>().Initialize(dir);
     }
 
-    public void OnEnterPlayer(Collider2D col)
+    public void OnEnterPlayer(Collider col)
     {
         target = col.transform;
     }
 
-    public void OnExitPlayer(Collider2D col)
+    public void OnExitPlayer(Collider col)
     {
         target = null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, brick_shoot_range);
+        if (target)
+        {
+            Gizmos.DrawLine(transform.position, target.position);
+        }
     }
 }
