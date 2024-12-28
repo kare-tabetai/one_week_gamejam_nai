@@ -80,7 +80,7 @@ public class VendingMachineController : MonoBehaviour
         clampSpeed();
     }
 
-    public void OnDamaged(int damage)
+    public void Damaged(int damage)
     {
         hp -= damage;
         hp = Mathf.Max(hp, 0);

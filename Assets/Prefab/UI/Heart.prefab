@@ -88,3 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8830432eed5f1041ab7a0113cd0d25a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shake_duration: 0.5
+  destroy_delay: 0.5
+  ui_image: {fileID: 5428723236645004387}
+  break_heart_sprite: {fileID: 21300000, guid: a17d441cbdc28994db5bf39322212ec0, type: 3}

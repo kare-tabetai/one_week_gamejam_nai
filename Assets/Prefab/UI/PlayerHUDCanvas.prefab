@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 222661160746686477}
   - component: {fileID: 2546785151183466765}
   m_Layer: 5
-  m_Name: LifeBar
+  m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heart_prefab: {fileID: 0}
+  hp_bar: {fileID: 0}
 --- !u!1001 &1811066268341756218
 PrefabInstance:
   m_ObjectHideFlags: 0
