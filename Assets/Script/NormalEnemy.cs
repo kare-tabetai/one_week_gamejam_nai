@@ -84,7 +84,8 @@ public class NormalEnemy : MonoBehaviour
 
         to_target.Normalize();
         transform.forward = to_target;
-        transform.Translate(Time.deltaTime * tracking_speed * to_target);
+        var delta = Time.deltaTime * tracking_speed * to_target;
+        transform.Translate(delta, Space.World);
     }
 
     void ChangeStateShoot()
@@ -93,7 +94,6 @@ public class NormalEnemy : MonoBehaviour
         animator.SetTrigger("Shoot");
         animator.SetBool("Walking", false);
         FaceToTarget();
-
     }
 
     void FaceToTarget()

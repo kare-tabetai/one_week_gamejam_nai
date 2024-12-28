@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.38663626, z: 0.014613152}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalScale: {x: 25, y: 4, z: 25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6516484755969776628}
@@ -202,7 +202,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4dc4d9551dd17ab4a9194b09a9c7a7e6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.72169
+      value: 0.27831078
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4dc4d9551dd17ab4a9194b09a9c7a7e6,
         type: 3}
@@ -212,7 +212,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4dc4d9551dd17ab4a9194b09a9c7a7e6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.690465
+      value: -3.309535
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4dc4d9551dd17ab4a9194b09a9c7a7e6,
         type: 3}
@@ -222,7 +222,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4dc4d9551dd17ab4a9194b09a9c7a7e6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4dc4d9551dd17ab4a9194b09a9c7a7e6,
         type: 3}
@@ -500,9 +500,9 @@ MonoBehaviour:
     type: 3}
   brick_shoot_range: 4
   target: {fileID: 0}
-  tracking_speed: 2
+  tracking_speed: 4
   throw_up_y_max: 1
-  shot_interval: 5
+  shot_interval: 2
 --- !u!4 &6516484755969776628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4dc4d9551dd17ab4a9194b09a9c7a7e6,
