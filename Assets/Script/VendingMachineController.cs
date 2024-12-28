@@ -30,6 +30,7 @@ public class VendingMachineController : MonoBehaviour
     public float shot_target_ray_cast_length = 20.0f;
     public float throw_up_y_max = 5.0f;
     public float shot_un_hit_ray_target_length = 5.0f;
+    public int hp;
 
 #if ENABLE_INPUT_SYSTEM
     public PlayerInput _playerInput;
@@ -56,7 +57,7 @@ public class VendingMachineController : MonoBehaviour
     Vector3 shot_target_point;
     void Start()
     {
-
+        HudCanvas.Instance.Initialize(hp);
     }
 
     void Update()
@@ -79,11 +80,22 @@ public class VendingMachineController : MonoBehaviour
         clampSpeed();
     }
 
+    public void OnDamaged(int damage)
+    {
+        hp -= damage;
+        hp = Mathf.Max(hp, 0);
+        HudCanvas.Instance.ChangeHp(hp);
+        if (hp <= 0) { Death(); }
+    }
+
+    public void Death()
+    {
+        //TODO:
+    }
+
     void shot()
     {
         var can = Instantiate(can_bullet, can_fire_point.position, Random.rotation);
-        //var dir = shot_target_point - can.transform.position;
-        //dir.Normalize();
 
         var dir = ThrowUpCalculation.OrbitCalculations(
             can.transform.position,
