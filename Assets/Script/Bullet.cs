@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour
         {
             if (!collision.gameObject.CompareTag("Player")) { return; }
             collision.gameObject.GetComponent<VendingMachineController>().Damaged(damage);
+            OnHit();
             return;
         }
 
@@ -40,6 +41,7 @@ public class Bullet : MonoBehaviour
         {
             if (!collision.gameObject.CompareTag("Enemy")) { return; }
             collision.gameObject.GetComponent<NormalEnemy>().Damaged(damage);
+            OnHit();
             return;
         }
     }

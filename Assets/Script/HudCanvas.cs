@@ -19,11 +19,16 @@ public class HudCanvas : MonoSingleton<HudCanvas>
     public void Initialize(int default_hp)
     {
         ui_hp = default_hp;
+        for (int i = 0; i < ui_hp; i++)
+        {
+            Instantiate(heart_prefab, hp_bar.transform);
+        }
     }
 
     public void ChangeHp(int new_hp)
     {
-        var delta = new_hp - ui_hp;
+        var delta = ui_hp - new_hp;
+        ui_hp = new_hp;
         var hearts = hp_bar.transform.GetComponentsInChildren<HeartUI>();
         for (int i = 0; i < delta; ++i)
         {

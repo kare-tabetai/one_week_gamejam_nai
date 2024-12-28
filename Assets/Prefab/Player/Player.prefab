@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7991325437655981459}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3931181252872956205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7172120219593292674}
+  m_Layer: 0
+  m_Name: player_target_point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7172120219593292674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3931181252872956205}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7991325437655981459}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4676910403489824352
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,6 +182,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3523641617204032257}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f82aeef7995b97147aa8efff74d279a4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7172120219593292674}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f82aeef7995b97147aa8efff74d279a4,
         type: 3}
@@ -242,6 +277,8 @@ MonoBehaviour:
   shot_target_ray_cast_length: 20
   throw_up_y_max: 0.5
   shot_un_hit_ray_target_length: 5
+  hp: 5
+  target_point: {fileID: 7172120219593292674}
   _playerInput: {fileID: 4909609846967251418}
 --- !u!114 &5768567059106912520
 MonoBehaviour:

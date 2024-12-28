@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 6442683446819656515, guid: eebe1b9fcbb82d54ba88b1d06e260b23,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -152,3 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5329704223643494908}
+  type: 1
+  damage: 1
+  destroy_delay: 8

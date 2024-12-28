@@ -31,11 +31,15 @@ public class VendingMachineController : MonoBehaviour
     public float throw_up_y_max = 5.0f;
     public float shot_un_hit_ray_target_length = 5.0f;
     public int hp;
+    public Transform target_point;
+    public Vector3 TargetPoint { get { return target_point.position; } }
 
+    static public VendingMachineController s_controller;
 #if ENABLE_INPUT_SYSTEM
     public PlayerInput _playerInput;
 #endif
     const float _threshold = 0.01f;
+
 
     private bool IsCurrentDeviceMouse
     {
@@ -58,6 +62,8 @@ public class VendingMachineController : MonoBehaviour
     void Start()
     {
         HudCanvas.Instance.Initialize(hp);
+        Debug.Assert(!s_controller);
+        s_controller = this;
     }
 
     void Update()
