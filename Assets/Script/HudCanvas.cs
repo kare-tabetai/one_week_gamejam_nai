@@ -5,6 +5,7 @@ public class HudCanvas : MonoSingleton<HudCanvas>
     public GameObject heart_prefab;
     int ui_hp;
     public Transform hp_bar;
+    public GameObject result_panel;
 
     void Start()
     {
@@ -35,5 +36,11 @@ public class HudCanvas : MonoSingleton<HudCanvas>
             var heart = hearts[hearts.Length - 1 - i];
             heart.Clash();
         }
+    }
+
+    public void OnDead()
+    {
+        result_panel.SetActive(true);
+        result_panel.GetComponent<ResultPanel>().Initialize();
     }
 }

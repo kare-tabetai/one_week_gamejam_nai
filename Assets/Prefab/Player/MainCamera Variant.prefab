@@ -223,6 +223,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   camera_brain: {fileID: 7579492900851786596}
+  _camera: {fileID: 7561683011200982907}
+--- !u!20 &7561683011200982907 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1499932245149406307}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7579492900851786596 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9078993845375825671, guid: f6d148d888ffbf54b9afe9936dfaec1f,

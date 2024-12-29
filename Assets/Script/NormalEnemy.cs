@@ -44,7 +44,7 @@ public class NormalEnemy : MonoBehaviour
     {
         if (is_auto_target)
         {
-            target = VendingMachineController.s_controller;
+            target = VendingMachineController.Instance;
         }
     }
 
@@ -247,11 +247,13 @@ public class NormalEnemy : MonoBehaviour
 
     public void OnEnterPlayer(Collider col)
     {
+        if (is_auto_target) { return; }
         target = col.GetComponent<VendingMachineController>();
     }
 
     public void OnExitPlayer(Collider col)
     {
+        if (is_auto_target) { return; }
         target = null;
     }
 

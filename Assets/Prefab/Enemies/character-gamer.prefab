@@ -542,7 +542,7 @@ MonoBehaviour:
   point_track_give_up_time: 8
   random_around_tracking_range: 5
   tracking_type: 0
-  is_auto_target: 0
+  is_auto_target: 1
   target_point: {fileID: 6857329312647358152}
 --- !u!4 &6516484755969776628 stripped
 Transform:

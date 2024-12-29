@@ -1,8 +1,9 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
-public class VendingMachineController : MonoBehaviour
+public class VendingMachineController : MonoSingleton<VendingMachineController>
 {
     public Rigidbody rb;
     public StarterAssets.StarterAssetsInputs input;
@@ -33,9 +34,8 @@ public class VendingMachineController : MonoBehaviour
     public float shot_un_hit_ray_target_length = 5.0f;
     public int hp;
     public Transform target_point;
-    public Vector3 TargetPoint { get { return target_point.position; } }
+    public Vector3 TargetPoint { get { return target_point ? target_point.position : Vector3.zero; } }
 
-    static public VendingMachineController s_controller;
 #if ENABLE_INPUT_SYSTEM
     public PlayerInput _playerInput;
 #endif
@@ -63,8 +63,7 @@ public class VendingMachineController : MonoBehaviour
     Vector3 shot_target_point;
     void Start()
     {
-        Debug.Assert(!s_controller);
-        s_controller = this;
+
     }
 
     public void Initialize()
@@ -105,7 +104,11 @@ public class VendingMachineController : MonoBehaviour
 
     public void Death()
     {
-        //TODO:
+        HudCanvas.Instance.OnDead();
+        Cursor.lockState = CursorLockMode.None;
+        Destroy(gameObject);
+
+        GamePlayManager.Instance.ClearSpawner();
     }
 
     void shot()
