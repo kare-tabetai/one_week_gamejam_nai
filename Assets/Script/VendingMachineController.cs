@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +41,7 @@ public class VendingMachineController : MonoBehaviour
 #endif
     const float _threshold = 0.01f;
 
+    bool is_initialized ;
 
     private bool IsCurrentDeviceMouse
     {
@@ -61,14 +63,21 @@ public class VendingMachineController : MonoBehaviour
     Vector3 shot_target_point;
     void Start()
     {
-        HudCanvas.Instance.Initialize(hp);
         Debug.Assert(!s_controller);
         s_controller = this;
+    }
+
+    public void Initialize()
+    {
+        is_initialized = true;
+        HudCanvas.Instance.Initialize(hp);
     }
 
     void Update()
     {
         rb.WakeUp();
+
+        if (!is_initialized) { return; }
 
         if (grounded && UnityEngine.Input.GetKeyDown(KeyCode.Space))
         {
@@ -113,11 +122,13 @@ public class VendingMachineController : MonoBehaviour
     void LateUpdate()
     {
         CameraRotation();
+        if (!is_initialized) { return; }
         correctVendingFornt();
     }
 
     private void FixedUpdate()
     {
+        if (!is_initialized) { return; }
         if (input_vec == Vector2.zero) { return; }
 
         Vector3 x_dir = CinemachineCameraTarget.transform.right;
@@ -224,5 +235,10 @@ public class VendingMachineController : MonoBehaviour
         if (lfAngle < -360f) lfAngle += 360f;
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
+    }
+
+    public void OnCameraActive()
+    {
+        Initialize();
     }
 }
