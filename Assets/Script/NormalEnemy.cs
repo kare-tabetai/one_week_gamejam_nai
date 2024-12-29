@@ -156,15 +156,15 @@ public class NormalEnemy : MonoBehaviour
             ChangeStateShoot();
             return;
         }
-        to_target.Normalize();
         float delta_value = Time.deltaTime * tracking_speed;
         if (to_target.magnitude <= delta_value)
         {
             ChangeStateShoot();
             return;
         }
-        var delta_vector = delta_value * to_target;
-        transform.forward = to_target;
+        
+        var delta_vector = delta_value * to_target.normalized;
+        transform.forward = to_target.normalized;
         transform.Translate(delta_vector, Space.World);
     }
 
