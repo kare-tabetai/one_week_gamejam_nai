@@ -219,6 +219,7 @@ public class NormalEnemy : MonoBehaviour
             hp = 0;
             animator.SetTrigger("Death");
             state = State.Dead;
+            ScoreManager.Instance.AddKillScore();
         }
     }
 
