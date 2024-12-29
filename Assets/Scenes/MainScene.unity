@@ -429,6 +429,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
       propertyPath: enemies.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2440,6 +2445,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2023238118}
     m_Modifications:
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
       propertyPath: enemies.Array.size
@@ -5751,6 +5761,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2023238118}
     m_Modifications:
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
       propertyPath: enemies.Array.size
@@ -12404,6 +12419,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
       propertyPath: spawn_rate
       value: 12
       objectReference: {fileID: 0}
@@ -13454,6 +13474,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2023238118}
     m_Modifications:
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
       propertyPath: enemies.Array.size
@@ -15699,6 +15724,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 732156960}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &738040148 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7579492900851786596, guid: 332631fd5055b0f469aa9b897097679c,
+    type: 3}
+  m_PrefabInstance: {fileID: 256541673}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &738736642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24322,6 +24359,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
       propertyPath: enemies.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -24633,6 +24675,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2023238118}
     m_Modifications:
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
       propertyPath: enemies.Array.size
@@ -30035,6 +30082,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
       propertyPath: spawn_rate
       value: 20
       objectReference: {fileID: 0}
@@ -31422,6 +31474,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2023238118}
     m_Modifications:
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
       propertyPath: spawn_rate
@@ -34300,6 +34357,11 @@ PrefabInstance:
       objectReference: {fileID: 2144595544}
     - target: {fileID: 5680566703682341730, guid: f61ad3e044e61e24cab955a56d7dff03,
         type: 3}
+      propertyPath: camaera_brain
+      value: 
+      objectReference: {fileID: 738040148}
+    - target: {fileID: 5680566703682341730, guid: f61ad3e044e61e24cab955a56d7dff03,
+        type: 3}
       propertyPath: player_camera
       value: 
       objectReference: {fileID: 661632295}
@@ -34531,6 +34593,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2023238118}
     m_Modifications:
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
       propertyPath: spawn_rate
@@ -37668,6 +37735,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
       propertyPath: spawn_rate
       value: 20
       objectReference: {fileID: 0}
@@ -38831,12 +38903,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914671175}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -16.710619, y: 0.91419625, z: 2.9279437}
   m_LocalScale: {x: 1, y: 3, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2023238118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1914671180
 MonoBehaviour:
@@ -38871,7 +38943,8 @@ MonoBehaviour:
   m_exit_events:
     m_PersistentCalls:
       m_Calls: []
-  m_trigger_tag: []
+  m_trigger_tag:
+  - Player
 --- !u!1001 &1917285512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40684,6 +40757,7 @@ Transform:
   - {fileID: 1704811625}
   - {fileID: 615359648}
   - {fileID: 1549882507}
+  - {fileID: 1914671179}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2023665568 stripped
@@ -44109,6 +44183,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
         type: 3}
+      propertyPath: enemy_root
+      value: 
+      objectReference: {fileID: 919057810}
+    - target: {fileID: 915945597052494575, guid: 492220383e8d1cf4e8b85997e7a135fc,
+        type: 3}
       propertyPath: enemies.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -44824,4 +44903,3 @@ SceneRoots:
   - {fileID: 919057810}
   - {fileID: 1354891008539287946}
   - {fileID: 2023238118}
-  - {fileID: 1914671179}
