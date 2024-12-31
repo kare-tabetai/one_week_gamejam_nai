@@ -12,7 +12,7 @@ public class ScoreManager : MonoSingleton<ScoreManager>
         kill_count++;
     }
 
-    public float GetTime() { return start_time - Time.time; }
+    public float GetTime() { return  Time.time - start_time; }
 
     private void Start()
     {

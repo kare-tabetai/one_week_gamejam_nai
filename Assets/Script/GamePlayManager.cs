@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class GamePlayManager : MonoSingleton<GamePlayManager>
 {
@@ -19,7 +20,14 @@ public class GamePlayManager : MonoSingleton<GamePlayManager>
 
     void Start()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        // https://discussions.unity.com/t/targetframerate-not-working-in-2021-3-1-lts-webgl/881482
+        // WebGLÇæÇ∆vSyncCountÇ0Ç…ÇµÅA60fpsÇ≈ÇÕÇ»Ç≠59fpsÇ…ÇµÇ»Ç¢Ç∆ê≥èÌÇ…ìÆçÏÇµÇ»Ç¢
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 59;
+#elif UNITY_EDITOR
         Application.targetFrameRate = 60;
+#endif
     }
 
     void Update()

@@ -93,11 +93,11 @@ public class NormalEnemy : MonoBehaviour
                 break;
             case TrackingType.RandomAround:
                 var random_range = Random.insideUnitCircle * random_around_tracking_range;
-                tracking_point = target.TargetPoint + new Vector3(random_range.x, 0.0f, random_range.y);
+                tracking_point = target.CenterPoint + new Vector3(random_range.x, 0.0f, random_range.y);
                 break;
             case TrackingType.Back:
-                var to_target = target.TargetPoint - TargetPoint;
-                tracking_point = target.TargetPoint + to_target;
+                var to_target = target.CenterPoint - TargetPoint;
+                tracking_point = target.CenterPoint + to_target;
                 break;
         }
     }
@@ -124,7 +124,7 @@ public class NormalEnemy : MonoBehaviour
 
     void UpdateTargetTracking()
     {
-        var to_target = target.TargetPoint - transform.position;
+        var to_target = target.CenterPoint - transform.position;
         if (to_target.sqrMagnitude <= brick_shoot_range * brick_shoot_range)
         {
             ChangeStateShoot();
@@ -179,7 +179,7 @@ public class NormalEnemy : MonoBehaviour
     void FaceToTarget()
     {
         if (!target) { return; }
-        var to_target = target.TargetPoint - transform.position;
+        var to_target = target.CenterPoint - transform.position;
         to_target.y = 0; ;
         if (to_target == Vector3.zero) { return; }
         to_target.Normalize();
@@ -240,8 +240,8 @@ public class NormalEnemy : MonoBehaviour
 
         var dir = ThrowUpCalculation.OrbitCalculations(
             brick_shot.transform.position,
-            target.TargetPoint,
-            target.TargetPoint.y + throw_up_y_max);
+            target.CenterPoint,
+            target.CenterPoint.y + throw_up_y_max);
         brick_shot.GetComponent<Bullet>().Initialize(dir);
     }
 
@@ -262,7 +262,7 @@ public class NormalEnemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, brick_shoot_range);
         if (target)
         {
-            Gizmos.DrawLine(transform.position, target.TargetPoint);
+            Gizmos.DrawLine(transform.position, target.CenterPoint);
             Gizmos.DrawLine(transform.position, tracking_point);
         }
     }

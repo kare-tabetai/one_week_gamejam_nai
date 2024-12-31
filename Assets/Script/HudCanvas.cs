@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class HudCanvas : MonoSingleton<HudCanvas>
@@ -6,15 +7,22 @@ public class HudCanvas : MonoSingleton<HudCanvas>
     int ui_hp;
     public Transform hp_bar;
     public GameObject result_panel;
+    public TextMeshProUGUI frame_rate_text;
+    public GameObject frame_rate_ui_root;
 
     void Start()
     {
-
+#if !DEVELOPMENT_BUILD && !UNITY_EDITOR
+        frame_rate_ui_root.SetActive(false);
+#endif
     }
 
     void Update()
     {
-
+#if DEVELOPMENT_BUILD ||UNITY_EDITOR
+        float fps = 1.0f / Time.deltaTime;
+        frame_rate_text.text = $"{fps:0.}";
+#endif
     }
 
     public void Initialize(int default_hp)

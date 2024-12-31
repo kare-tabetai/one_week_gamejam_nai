@@ -34,14 +34,15 @@ public class VendingMachineController : MonoSingleton<VendingMachineController>
     public float shot_un_hit_ray_target_length = 5.0f;
     public int hp;
     public Transform target_point;
-    public Vector3 TargetPoint { get { return target_point ? target_point.position : Vector3.zero; } }
+    public float shot_speed = 20.0f;
+    public Vector3 CenterPoint { get { return target_point ? target_point.position : Vector3.zero; } }
 
 #if ENABLE_INPUT_SYSTEM
     public PlayerInput _playerInput;
 #endif
     const float _threshold = 0.01f;
 
-    bool is_initialized ;
+    bool is_initialized;
 
     private bool IsCurrentDeviceMouse
     {
@@ -113,12 +114,21 @@ public class VendingMachineController : MonoSingleton<VendingMachineController>
 
     void shot()
     {
-        var can = Instantiate(can_bullet, can_fire_point.position, Random.rotation);
-
         var dir = ThrowUpCalculation.OrbitCalculations(
-            can.transform.position,
+            can_fire_point.position,
             shot_target_point,
             shot_target_point.y + throw_up_y_max);
+        if (dir == Vector3.zero)
+        {
+            return;
+        }
+
+        var can = Instantiate(can_bullet, can_fire_point.position, Random.rotation);
+
+        //var _to_target = shot_target_point - can_fire_point.position;
+        //if(_to_target == Vector3.zero) { return; }
+        //_to_target.Normalize();
+        //var dir = shot_speed * _to_target;
         can.GetComponent<Bullet>().Initialize(dir);
     }
 
@@ -162,12 +172,15 @@ public class VendingMachineController : MonoSingleton<VendingMachineController>
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, shot_target_ray_cast_length, shot_target_layer))
         {
-            shot_target_point = hit.point;
+            var camera_hit_sqr_magnitude = (hit.point - Camera.main.transform.position).sqrMagnitude;
+            var camera_center_sqr_magnitude = (CenterPoint - Camera.main.transform.position).sqrMagnitude;
+            if (camera_center_sqr_magnitude < camera_hit_sqr_magnitude)
+            {
+                shot_target_point = hit.point;
+                return;
+            }
         }
-        else
-        {
-            shot_target_point = Camera.main.transform.position + Camera.main.transform.forward * shot_un_hit_ray_target_length;
-        }
+        shot_target_point = Camera.main.transform.position + Camera.main.transform.forward * shot_un_hit_ray_target_length;
     }
 
     void correctVendingFornt()
